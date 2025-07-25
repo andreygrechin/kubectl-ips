@@ -1,0 +1,12 @@
+# Common
+.env
+.DS_Store
+
+# Project
+bin/
+dist/
+covdatafiles/
+
+vendor/
+coverage.out
+.vscode/launch.json

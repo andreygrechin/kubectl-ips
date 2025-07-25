@@ -1,0 +1,93 @@
+---
+version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+  concurrency: 4
+
+linters:
+  default: all
+  disable:
+    - depguard
+    - gochecknoglobals
+    - exhaustruct
+    - ireturn
+    - wsl
+  settings:
+    goconst:
+      min-occurrences: 2
+    gocritic:
+      enabled-tags:
+        - performance
+        - style
+        - experimental
+    paralleltest:
+      ignore-missing: true
+      ignore-missing-subtests: true
+    tagliatelle:
+      case:
+        extended-rules:
+          json:
+            case: snake
+    misspell:
+      locale: US
+  exclusions:
+    generated: lax
+    warn-unused: true
+    # presets:
+    #   - comments
+    #   - common-false-positives
+    #   - legacy
+    #   - std-error-handling
+    rules:
+      - linters:
+          - gochecknoinits
+        text: don't use `init` function
+      - linters:
+          - revive
+        text: "package-comments: should have a package comment"
+      - linters:
+          - varnamelen
+        text: is too short for the scope of its usage
+      - linters:
+          - forbidigo
+        text: forbidden by pattern
+      - linters:
+          - revive
+        text: should have comment or be unexported
+      - linters:
+          - funlen
+        text: is too long
+        path: "^.*_test\\.go$"
+      - linters:
+          - goconst
+        text: occurrences, make it a constant
+        path: "^.*_test\\.go$"
+      - linters:
+          - embeddedstructfieldcheck
+        text: there must be an empty line separating embedded fields from regular fields
+      - linters:
+          - noinlineerr
+        text: avoid inline error handling using `if err := ...; err != nil`; use plain assignment `err := ...`
+      - linters:
+          - wsl_v5
+        text: "missing whitespace above this line"
+
+    # paths:
+    #   - vendor
+
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    # - golines
+  exclusions:
+    generated: lax
+    # paths:
+    # - vendor
+    # - third_party$
+    # - builtin$
+    # - examples$
