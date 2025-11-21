@@ -132,7 +132,13 @@ func (o *IPsOptions) Complete(cmd *cobra.Command, _ []string) error {
 		if o.configFlags.Namespace != nil && *o.configFlags.Namespace != "" {
 			o.namespace = *o.configFlags.Namespace
 		} else {
-			o.namespace = "default"
+			// get namespace from current kubectl context
+			rawConfig := o.configFlags.ToRawKubeConfigLoader()
+			currentNS, _, err := rawConfig.Namespace()
+			if err != nil {
+				return fmt.Errorf("failed to get current namespace: %w", err)
+			}
+			o.namespace = currentNS
 		}
 	}
 

@@ -36,7 +36,7 @@ func TestIPsOptionsComplete(t *testing.T) {
 		expectedAllNS bool
 		expectError   bool
 	}{
-		"default namespace": {
+		"namespace from current context": {
 			args:          []string{},
 			expectedNS:    "default",
 			expectedAllNS: false,
