@@ -31,7 +31,7 @@ build:
 		-X main.BuildTime=$(BUILDTIME) \
 		-X main.Commit=$(COMMIT)" \
 		-o bin/$(APP_NAME) \
-		./cmd/kubectl-ips.go
+		./cmd/kubectl-ips
 
 coverage-report:
 	go test -race -coverprofile="${GOCOVERDIR}/coverage.out" ./... && go tool cover -func="${GOCOVERDIR}/coverage.out"
