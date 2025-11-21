@@ -175,8 +175,8 @@ func GetNodeName(pod *corev1.Pod) string {
 	return noneValue
 }
 
-func makeTableRow(pod *corev1.Pod, ip string, showNamespace, wide, showLabels bool) []interface{} {
-	row := []interface{}{}
+func makeTableRow(pod *corev1.Pod, ip string, showNamespace, wide, showLabels bool) []any {
+	row := []any{}
 
 	if showNamespace {
 		row = append(row, pod.Namespace)

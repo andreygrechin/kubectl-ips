@@ -42,27 +42,14 @@ linters:
     #   - std-error-handling
     rules:
       - linters:
-          - gochecknoinits
-        text: don't use `init` function
-      - linters:
           - revive
         text: "package-comments: should have a package comment"
       - linters:
           - varnamelen
         text: is too short for the scope of its usage
       - linters:
-          - forbidigo
-        text: forbidden by pattern
-      - linters:
           - revive
         text: should have comment or be unexported
-      - linters:
-          - funlen
-        text: is too long
-        path: "^.*_test\\.go$"
-      - linters:
-          - goconst
-        text: occurrences, make it a constant
         path: "^.*_test\\.go$"
       - linters:
           - embeddedstructfieldcheck
