@@ -16,6 +16,7 @@ const (
 	unknownValue = "<unknown>"
 )
 
+// FormatPodAge returns the age of the pod in human-readable format.
 func FormatPodAge(pod *corev1.Pod) string {
 	if pod.CreationTimestamp.IsZero() {
 		return unknownValue
@@ -24,6 +25,7 @@ func FormatPodAge(pod *corev1.Pod) string {
 	return duration.HumanDuration(time.Since(pod.CreationTimestamp.Time))
 }
 
+// FormatPodStatus returns the current status of the pod.
 func FormatPodStatus(pod *corev1.Pod) string {
 	reason := string(pod.Status.Phase)
 	if pod.Status.Reason != "" {
@@ -134,6 +136,7 @@ func handlePodDeletion(pod *corev1.Pod, reason string) string {
 	return reason
 }
 
+// FormatPodReady returns the number of ready containers out of total containers.
 func FormatPodReady(pod *corev1.Pod) string {
 	readyContainers := 0
 	totalContainers := len(pod.Status.ContainerStatuses)
@@ -146,6 +149,7 @@ func FormatPodReady(pod *corev1.Pod) string {
 	return fmt.Sprintf("%d/%d", readyContainers, totalContainers)
 }
 
+// FormatRestarts returns the total number of container restarts in the pod.
 func FormatRestarts(pod *corev1.Pod) string {
 	restarts := int32(0)
 	for i := range pod.Status.ContainerStatuses {
@@ -155,6 +159,7 @@ func FormatRestarts(pod *corev1.Pod) string {
 	return strconv.Itoa(int(restarts))
 }
 
+// FormatLabels formats a map of labels into a comma-separated key=value string.
 func FormatLabels(labels map[string]string) string {
 	if len(labels) == 0 {
 		return noneValue
@@ -167,6 +172,7 @@ func FormatLabels(labels map[string]string) string {
 	return strings.Join(labelStrings, ",")
 }
 
+// GetNodeName returns the name of the node where the pod is scheduled.
 func GetNodeName(pod *corev1.Pod) string {
 	if pod.Spec.NodeName != "" {
 		return pod.Spec.NodeName

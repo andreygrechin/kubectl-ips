@@ -14,10 +14,13 @@ import (
 )
 
 var (
-	ErrExpectedTable   = errors.New("expected metav1.Table")
+	// ErrExpectedTable is returned when the object is not a metav1.Table.
+	ErrExpectedTable = errors.New("expected metav1.Table")
+	// ErrExpectedPodList is returned when the object is not a PodList.
 	ErrExpectedPodList = errors.New("expected PodList")
 )
 
+// ResourcePrinter is an interface for printing Kubernetes objects.
 type ResourcePrinter interface {
 	PrintObj(obj runtime.Object, out io.Writer) error
 }

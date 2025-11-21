@@ -71,6 +71,7 @@ func NewIPsOptions(streams genericiooptions.IOStreams) *IPsOptions {
 	}
 }
 
+// ErrUnsupportedFormat is returned when an unsupported output format is specified.
 var ErrUnsupportedFormat = errors.New("unsupported output format")
 
 // NewCmdIPs provides a cobra command wrapping IPsOptions.
