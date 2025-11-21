@@ -1,5 +1,8 @@
 .PHONY: all lint format fmt test build coverage-report coverage-report-html security_scan check_clean release-test release
 
+# Ensure Go tools are in PATH
+export PATH := $(shell go env GOPATH)/bin:$(PATH)
+
 # Build variables
 VERSION    := $(shell git describe --tags --always --dirty)
 COMMIT     := $(shell git rev-parse --short HEAD)
